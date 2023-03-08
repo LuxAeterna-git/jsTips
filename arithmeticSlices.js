@@ -1,14 +1,16 @@
-var numberOfArithmeticSlices = function(nums) {
-    if (nums.length < 3) return 0
+var numberOfArithmeticSlices = function (A) {
+	let sum = 0,
+		dp = Array(A.length).fill(0);
 
-    let res = 0
-    let diff = 0
+	for (var i = 2; i <= dp.length - 1; i++) {
+		if (A[i] - A[i - 1] === A[i - 1] - A[i - 2]) {
+			dp[i] = 1 + dp[i - 1];
+			sum += dp[i];
+		}
+	}
 
-    for (let i = 1; i < nums.length; i++) {
-        let x = nums[i]- nums[i-1]
-        if (diff != x) return diff
-        if (diff == x && i >2 ) res++
-    }
-
-    return diff
+	return sum
 };
+// Its not my solution but now I am loking clear: every dp element showing
+// how many arithmetic slices is before index of element.
+//  Answer is a sum of dp elements
